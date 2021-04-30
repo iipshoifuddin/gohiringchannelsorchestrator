@@ -36,10 +36,13 @@ Gorm is a web application framework for Golang.
 1. Install Docker Engine
 2. Clone form git hub  `git clone https://github.com/iipshoifuddin/gohiringchannelsorchestrator.git`
 3. go to directory ../gohiringchannelsorchestrator
-4. Type `docker pull mysql`
-5. Type `docker pull redis`
-6. Type `docker-compose build`
-7. Type `docker-compose up`
+4. Clone app golang from github `git clone https://github.com/iipshoifuddin/subdockergohiringchannels.git`
+5. Delete folder gohiringchannels
+6. Rename folder `subdockergohiringchannels` to `gohiringchannels`
+7. Type `docker pull mysql`
+8. Type `docker pull redis`
+9. Type `docker-compose build`
+10. Type `docker-compose up`
 11. Open Postman desktop application or Chrome web app extension that has installed before
 12. Choose HTTP Method and enter request url.(ex. localhost:8085/engineers)
 13. You can see all the end point in [here](#postman-collection)
