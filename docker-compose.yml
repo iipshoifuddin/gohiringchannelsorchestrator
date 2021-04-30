@@ -1,0 +1,45 @@
+version: "3.7"
+
+services: 
+  service-gohiringchannels:
+    build: ./gohiringchannels/
+    environment:
+      - PORT=8085
+      - MYSQL_CONN_STRING=developer:dev_password@tcp(service-mysql:3306)/hiringchannels?parseTime=true
+      - REDIS_CONN_STRING=service-redis:6379
+      - REDIS_CONN_PASS_STRING=JdB+8ibNYRSnB6UxzMylQdStzmoaX2MCL4LRf3Crt12xDnGmgGvXWb+I/s98/vaEuJRTJ01b6V1bvpSG
+    ports:
+      - "8085:8085"
+    networks: 
+        - my-network
+    restart: on-failure
+    depends_on: 
+      - service-mysql
+      - service-redis
+
+  service-mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - ./docker-volume-mysql:/var/lib/mysql
+    ports:
+      - 3306
+    networks: 
+      - my-network
+    restart: on-failure
+
+  service-redis:
+    image: redis:latest
+    volumes:
+      - ./docker-volume-redis/:/usr/local/etc/redis
+    command: /usr/local/etc/redis/redis.conf
+    ports:
+      - 6379
+    networks: 
+      - my-network
+    restart: on-failure
+  
+
+networks: 
+  my-network:
